@@ -1,0 +1,4 @@
+<h1>Completed Tasks</h1>
+
+{% for task in completed_tasks %} {{forloop.counter}}. {{ task }}
+<a href="/remove-task/{{forloop.counter}}">del</a> <br />{% endfor %}
