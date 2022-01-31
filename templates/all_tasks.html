@@ -1,0 +1,16 @@
+<h1>Task Management Application</h1>
+
+<h2>All Tasks</h2>
+
+<h3>Pending tasks</h3>
+
+{% for task in pending_tasks %} {{forloop.counter}}. {{ task.title }}
+{{task.created_date}}
+<a href="/delete-task/{{task.id}}">del</a>
+<a href="/complete_task/{{task.id}}">complete</a> <br />{% endfor %}
+
+<h3>Completed tasks</h3>
+
+{% for task in completed_tasks %} {{forloop.counter}}. {{ task.title }}
+{{task.created_date}}
+<a href="/delete-task/{{task.id}}">del</a> <br />{% endfor %}
