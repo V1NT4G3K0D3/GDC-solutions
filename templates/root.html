@@ -1,0 +1,27 @@
+{% extends 'base.html' %} 
+
+{% block title %}Welcome !{% endblock %} 
+
+{% block  content %}
+<div class="flex justify-between items-center">
+    <h2 class="text-4xl pb-4 font-bold">Hi {{ user }}</h2>
+</div>
+
+<p class="text-gray-600 tracking-wide">To not stay anonymous for long:</p>
+
+<ul class="flex m-6">
+    <li class="flex-1 mr-2">
+      <a class="text-center block rounded-2xl text-black hover:bg-red-200 py-2 px-4" href="/user/login">Login</a>
+    </li>
+    <li class="flex-1 mr-2">
+      <a class="text-center block rounded-2xl text-black hover:bg-red-200 py-2 px-4" href="/user/signup">Signup</a>
+    </li>
+</ul>
+
+
+<p class="text-black tracking-wide text-2xl m-2">Hey there 👋</p>
+<p class="text-black tracking-wide mb-5">This todo-app is a multi-user application. Users can create tasks for themselves, update its contents, delete it, and also move it to completed.</p>
+<p class="text-black tracking-wide text-sm text-center">Handcrafted by Pragati</p>
+
+
+{% endblock %}

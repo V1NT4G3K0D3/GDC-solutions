@@ -1,0 +1,17 @@
+<!-- templates/base.html -->
+{% comment %} {% load static %} {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}Task Manager{% endblock %}</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> 
+    {% block styles %} {% endblock %}
+  </head>
+  <body class="flex justify-center">
+    <div class="bg-white m-16 max-w-sm max-h-screen flex flex-col grow">
+        {% block content %}
+        
+        {% endblock content %}
+    </div>
+  </body>
+</html>

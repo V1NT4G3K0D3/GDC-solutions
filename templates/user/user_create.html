@@ -1,0 +1,39 @@
+{% extends 'base.html' %} 
+{% block title %}User signup{% endblock %} 
+
+{% comment %} {% block styles %} 
+  <link rel="stylesheet" href="{% static 'static/tasks.css' %}"> 
+{% endblock %}  {% endcomment %}
+
+{% block content %}
+  <p class="text-5xl pb-5 font-bold">Todo Manager</p>
+  <p class="text-3xl pb-3">Signup</p>
+  <form action="" method="post">
+    {% csrf_token %}
+    {% comment %} {{ form.non_field_errors }}
+    {% for hidden in form.hidden_fields %}
+      {{ hidden }}  
+    {% endfor %} {% endcomment %}
+    {% for field in form.visible_fields %}
+      <div class="fieldWrapper pb-4">
+        <label class="text-xl" for="{{ field.id_for_label }}">
+          {{ field.label }}
+        </label>
+        <br>
+        {{field}}
+        {% for error in field.errors%}
+            {{error|striptags}}
+        {% endfor %}
+        {% if field.help_text %}
+        <div class="text-slate-600 text-xs list-disc">
+            {{ field.help_text|safe }}
+        </div> 
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button type="submit" class="w-full h-12 px-6 text-red-100 transition-colors duration-150 bg-red-600 rounded-lg focus:shadow-outline hover:bg-red-700">Signup</button>
+  </form>
+  <div class="text-center mt-4">
+    <a href="/user/login" class="text-red-900 transition-colors duration-150 hover:text-red-600">Already have an account?</a>
+  </div>
+{% endblock %}

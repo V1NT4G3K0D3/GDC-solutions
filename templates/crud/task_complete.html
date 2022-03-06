@@ -1,0 +1,17 @@
+{% extends 'base.html' %} 
+
+{% block title %}Complete task{% endblock %} 
+
+{% block content %}
+  <h2 class="text-4xl pb-4 font-bold">Complete task</h2>
+  <form action="" method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to mark "{{object}}" task as completed ?</p>
+    <button type="submit" class="mt-5 w-full h-12 px-6 text-red-100 transition-colors duration-150 bg-red-600 rounded-lg focus:shadow-outline hover:bg-red-700">Complete</button>
+  </form>
+  
+  <a href="/tasks">
+    <button type="submit" class="mt-4 w-full h-12 px-6 text-red-100 transition-colors duration-150 bg-red-600 rounded-lg focus:shadow-outline hover:bg-red-700">Cancel</button>
+  </a>
+  
+{% endblock %}
