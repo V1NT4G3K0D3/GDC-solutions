@@ -1,0 +1,113 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %}Tasks{% endblock %} 
+
+{% block content %}
+<div class="flex justify-between items-center">
+    <h2 class="text-4xl pb-4 font-bold">Hi {{ user }}</h2>
+    <p class="text-lg text-red-600 hover:text-red-900"><a href="/user/logout">Log out</a></p>
+</div>
+
+<p class="text-gray-600 tracking-wide">{{completed_count}} of {{pending_count}} tasks completed </p>
+
+{% block nav %}
+<ul class="flex mt-6">
+    <li class="flex-1 mr-2">
+      <a class="text-center block border rounded-2xl py-2 px-4 bg-red-500 hover:bg-red-700 text-white" href="/form-tasks">All</a>
+    </li>
+    <li class="flex-1 mr-2">
+      <a class="text-center block rounded-2xl text-black hover:bg-red-200 py-2 px-4" href="/form-pending">Pending</a>
+    </li>
+    <li class="text-center flex-1">
+      <a class="text-center block rounded-2xl text-black hover:bg-red-200 py-2 px-4" href="/form-completed">Completed</a>
+    </li>
+    <li class="text-center flex-1">
+        <a class="text-center block rounded-2xl text-black hover:bg-red-200 py-2 px-4" href="/form-deleted">Deleted</a>
+    </li>
+</ul>
+{% endblock %}
+
+<form action="" method="get" class="flex mt-4 space-x-4 items-center">
+  <input class=" px-3 py-2 bg-white border 
+  shadow-sm border-slate-300 placeholder-slate-400 
+  focus:outline-none focus:border-sky-500 focus:ring-sky-500 
+  block w-full rounded-lg sm:text-sm focus:ring-1 bg-gray-200" 
+  type="text" name="search" 
+  placeholder="Search"/>
+  <button class="text-center block border rounded-xl h-10 px-5 bg-red-500 hover:bg-red-700 text-white" type="submit">Search</button>
+</form>
+
+
+
+<div class="flex justify-center m-2">
+  <a href="?page={{request.GET.page}}&search={{request.GET.search}}">
+    <button class="m-1 w-10 h-10 text-red-600 transition-colors duration-150 rounded-full focus:shadow-outline bg-red-100 hover:bg-red-200">
+      <
+    </button>
+  </a>
+  {% for page in paginator.page_range %}
+    <a href="?page={{page}}&search={{request.GET.search}}">
+      <button class="m-1 w-10 h-10 text-red-600 transition-colors duration-150 rounded-full focus:shadow-outline bg-red-100 hover:bg-red-200">
+        {{page}}
+      </button>
+    </a>
+  {%endfor%}
+  <a href="?page={{request.GET.page}}&search={{request.GET.search}}">
+    <button class="m-1 w-10 h-10 text-red-600 transition-colors duration-150 rounded-full focus:shadow-outline bg-red-100 hover:bg-red-200">
+      >
+    </button>
+  </a>
+</div>
+
+
+{% block tasks %}
+<div class="mt-1">
+  {% for task in tasks %} 
+  <a href="/form-detail-task/{{task.id}}">
+    <div class="flex justify-between items-start mb-4 font-semibold bg-gray-100 rounded-3xl border shadow-xl p-4 h-auto">
+      <div>
+
+        {% if task.deleted %}
+          {% if task.completed %}
+            <p class="text-gray-600 line-through">{{task.title}}</p>
+          {% else %}
+            <p class="text-red-600 line-through">{{task.title}}</p>
+          {% endif %}
+        {% else %}
+          {% if task.completed %}
+          <p class="text-green-600 line-through">{{task.title}}</p>
+          {% else %}
+            <p class="text-black">{{task.title}}</p>
+          {% endif %}
+        {% endif %}
+
+        
+
+        <p class="font-semibold text-sm text-gray-600">{{task.created_date}}</p>
+        <p class="font-semibold text-xl text-gray-700">{{task.priority}} </p>
+      </div>
+      <div class="flex space-x-1">
+        <a href="/form-update-task/{{task.id}}">
+          <button class=" bg-green-500 hover:bg-green-700 text-white-800 font-bold py-2 px-3 rounded inline-flex items-center">
+            <img src="{% static 'vectors/edit.svg' %}" alt="edit">
+          </button>
+        </a>
+        <a href="/form-delete-task/{{task.id}}">
+          <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+            <img src="{% static 'vectors/bin.svg' %}" alt="del">
+          </button>
+        </a>
+      </div>
+    </div>
+  </a>
+
+  {% endfor %}
+</div>
+{% endblock %}
+
+<a href="/form-create-task">
+  <button type="submit" class="mt-4 w-full h-12 px-6 text-red-100 transition-colors duration-150 bg-red-600 rounded-lg focus:shadow-outline hover:bg-red-700">Add</button>
+</a>
+
+
+{% endblock %}
