@@ -86,11 +86,8 @@ def task_pre_save_signal(sender, instance, **kwargs):
             push_data(instance.priority, next_task)
 
 
-def task_post_save_signal(sender, instance, **kwargs):
-    print(instance)
-    print(sender)
-    print(f" Kwargs: {kwargs}")
+# def task_post_save_signal(sender, instance, **kwargs):
 
 
 pre_save.connect(task_pre_save_signal, sender=Task)
-post_save.connect(task_post_save_signal, sender=Task)
+# post_save.connect(task_post_save_signal, sender=Task)
