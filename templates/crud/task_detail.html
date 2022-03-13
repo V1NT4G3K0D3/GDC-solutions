@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}Detail tasks{% endblock %} 
+
+{% block content %}
+  <h2 class="text-4xl pb-4 font-bold">Details of the task</h2>
+  <div class="flex justify-between items-center">
+    <div class="text-lg font-medium">Title: {{object.title}}</div>
+    <div class="text-sm font-small">{{object.created_date}}</div>
+  </div>
+  <div class="text-lg font-small">Description: <br>{{object.description}}</div>
+
+
+  <a href="/form-tasks">
+    <button type="submit" class="mt-4 w-full h-12 px-6 text-red-100 transition-colors duration-150 bg-red-600 rounded-lg focus:shadow-outline hover:bg-red-700">Tasks</button>
+  </a>
+
+{% endblock %}
