@@ -1,0 +1,28 @@
+{% extends 'base.html' %} 
+
+{% block title %}Update tasks{% endblock %} 
+
+{% block content %}
+  <h2 class="text-4xl pb-4 font-bold">Update task</h2>
+  <form action="" method="post">
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+      <div class="fieldWrapper pb-4">
+        <label class="text-xl" for="{{ field.id_for_label }}">
+          {{ field.label }}
+        </label>
+        <br>
+        {{field}}
+        {% for error in field.errors%}
+            {{error|striptags}}
+        {% endfor %}
+        {% if field.help_text %}
+        <div class="text-slate-600 text-xs list-disc">
+            {{ field.help_text|safe }}
+        </div> 
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button type="submit" class="w-full h-12 px-6 text-red-100 transition-colors duration-150 bg-red-600 rounded-lg focus:shadow-outline hover:bg-red-700">Update</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'tasks_home.html' %}
+{% load static %}
+
+{% block nav %}
+<ul class="flex mt-6">
+    <li class="flex-1 mr-2">
+      <a class="text-center block rounded-2xl text-black hover:bg-red-200 py-2 px-4" href="/form-tasks">All</a>
+    </li>
+    <li class="flex-1 mr-2">
+      <a class="text-center block rounded-2xl text-black hover:bg-red-200 py-2 px-4" href="pending">Pending</a>
+    </li>
+    <li class="text-center flex-1">
+      <a class="text-center block rounded-2xl text-black hover:bg-red-200 py-2 px-4" href="completed">Completed</a>
+    </li>
+    <li class="text-center flex-1">
+        <a class="text-center block border rounded-2xl py-2 px-4 bg-red-500 hover:bg-red-700 text-white" href="deleted">Deleted</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block tasks %}
+<div class="mt-1">
+  {% for task in deleted_tasks %} 
+  <a href="/form-detail-task/{{task.id}}">
+    <div class="flex justify-between items-start mb-4 font-semibold bg-gray-100 rounded-3xl border shadow-xl p-4 h-auto">
+      <div>
+        {{ task.title }}
+        <p class="font-semibold text-sm text-gray-600">{{task.created_date}}</p>
+        <p class="font-semibold text-xl text-gray-700">{{task.priority}} </p>
+      </div>
+      <div class="flex space-x-1">
+        <a href="/form-update-task/{{task.id}}">
+          <button class=" bg-green-500 hover:bg-green-700 text-white-800 font-bold py-2 px-3 rounded inline-flex items-center">
+            <img src="{% static 'vectors/edit.svg' %}" alt="edit">
+          </button>
+        </a>
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}
