@@ -105,11 +105,10 @@ def task_pre_save_signal(sender, instance, **kwargs):
             push_data(instance.priority, next_task)
 
 
-# def user_post_save_signal(sender, instance, **kwargs):
-#     if not instance.last_sent_time == instance.preferred_time:
-#         instance.last_sent_time = instance.preferred_time
-#         instance.save()
+def user_post_save_signal(sender, instance, **kwargs):
+    if not Preference.objects.filter(user=instance).exists():
+        Preference.objects.create(user=instance)
 
 
 pre_save.connect(task_pre_save_signal, sender=Task)
-# post_save.connect(user_post_save_signal, sender=Preference)
+post_save.connect(user_post_save_signal, sender=User)
